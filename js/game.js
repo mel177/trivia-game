@@ -168,7 +168,7 @@
             correcAnswer: "d"
         },
         {
-            question: "This is a brand new information!î Who said it?",
+            question: "This is a brand new information! Who said it?",
             answers: {
                 a: "Monica",
                 b: "Rachel",
