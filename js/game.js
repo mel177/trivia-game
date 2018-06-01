@@ -1,74 +1,71 @@
-(function() {
-    function buildQuiz() {
-      // we'll need a place to store the HTML output
-      const output = [];
-  
-      // for each question...
-      myQuestions.forEach((currentQuestion, questionNumber) => {
-        // we'll want to store the list of answer choices
-        const answers = [];
-  
-        // and for each available answer...
-        for (letter in currentQuestion.answers) {
-          // ...add an HTML radio button
-          answers.push(
-            `<label>
-              <input type="radio" name="question${questionNumber}" value="${letter}">
-              ${letter} :
-              ${currentQuestion.answers[letter]}
-            </label>`
-          );
+$(document).ready(function(){
+        function buildQuiz(){
+         var quizElement = document.querySelector('#main');
+
+         function displayTrivia(trivia, q1) {
+             var answersHTML = [];
+
+             for(answer in trivia.answers) {
+                 answersHTML.push('<label>${answers}) ${trivia.answer[answers]}</label>');
+             }
+             var triviaHTML = '
+             <div class="row">
+                <div class="col-sm">
+                <p>${triviaNumber}. ${trivia.question}</p>
+                ${answersHTML.join("")}
+                </div>
+                </div>
+                ';
+             quizElement.innerHTML = quizElement.innerHTML + triviaHTML;
+            }
         }
-  
-        // add this question and its answers to the output
-        output.push(
-          `<div class="question"> ${currentQuestion.question} </div>
-          <div class="answers"> ${answers.join("")} </div>`
-        );
-      });
-  
-      // finally combine our output list into one string of HTML and put it on the page
-      quizContainer.innerHTML = output.join("");
-    }
-  
-    function showResults() {
-      // gather answer containers from our quiz
-      const answerContainers = quizContainer.querySelectorAll(".answers");
-  
-      // keep track of user's answers
-      let numCorrect = 0;
-  
-      // for each question...
-      myQuestions.forEach((currentQuestion, questionNumber) => {
-        // find selected answer
-        const answerContainer = answerContainers[questionNumber];
-        const selector = `input[name=question${questionNumber}]:checked`;
-        const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-  
-        // if answer is correct
-        if (userAnswer === currentQuestion.correctAnswer) {
-          // add to the number of correct answers
-          numCorrect++;
-  
-          // color the answers green
-          answerContainers[questionNumber].style.color = "lightgreen";
-        } else {
-          // if answer is wrong or blank
-          // color the answers red
-          answerContainers[questionNumber].style.color = "red";
+
+        buildQuiz();
+        var index = 0;
+        var countdownTimer = {
+            time : 300,
+            reset: function() {
+                    this.time = 300;
+                    $('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
+            },
+            start: function() {
+                counter = setInterval(countdownTimer.count, 1000);
+            },
+            stop: function() {
+                clearInterval(counter);
+            },
+            count: function() {
+                countdownTimer.time--;
+                console.log(countdownTimer.time);
+                $('.timer').html(countdownTimer.time);
+              if (countdownTimer.time >= 0) {
+                  $('.timer').html('<h3>' + countdownTimer.time + 'seconds remaining</h3>');
+              }  
+              else {
+                    index++;
+                    answerWrong();
+                    countdownTimer.reset();
+                    if (index < questionArray.length) {
+                        loadQuiz(index);
+                    } else {
+                            $(".answerchoice").hide();
+                            showScore();
+                    }
+              }
+            }
+        
         }
-      });
-  
-      // show number of correct answers out of total
-      resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
-    }
-  
-    const quizContainer = document.getElementById("quiz");
-    const resultsContainer = document.getElementById("results");
-    const submitButton = document.getElementById("submit");
-    const myQuestions = [
-        {
-            question: "Whats is the name of Phoebe's birth mother?",
+
+
+
+     // Trivia quiz container
+      
+        var correct = 0;
+        var wrong = 0;
+        
+    
+        var q1 = {
+            question : "Whats is the name of Phoebe's birth mother?",
             answers: {
                 a: "Rose",
                 b: "Phoebe", 
@@ -76,9 +73,11 @@
                 d: "Daisy"
             },
             correctAnswer: "b"
-        },
-        {
-             questions:"Chandler made out with which of Joey's sisters?",
+        };
+     buildQuiz(q1.question)
+        
+             var q2 = {
+            question :  "Chandler made out with which of Joey's sisters?",
             answers: {
                 a: "Mary Louisa",
                 b: "Mary Veronica",
@@ -86,9 +85,10 @@
                 d: "Mary Angela" 
             },
             correctAnswer: "d"
-        },
-        {
-            question: "Who isn't one of Joey's sister?",
+        };
+        
+        var q3 = {
+            question : "Who isn't one of Joey's sister?",
             answers: {
                 a: "Vivian", 
                 b: "Tina",
@@ -96,8 +96,9 @@
                 d: "Mary Theresa"
             },
             correctAnswer: "a"
-        },
-        {
+        };
+        
+            var q4 = {
             question: "Where has Rachel NOT worked?",
             answers: {		
                 a: "Gucci", 
@@ -106,8 +107,9 @@
                 d: "Bloomingdales"
             },
             correctAnswer: "a"
-        },
-        {
+        };
+
+            var q5 = {
             question: "Which friend accidentally saw Rachel's boobies'?",
             answers: {
                 a: "Joey",
@@ -116,8 +118,8 @@
                 d: "Chandler" 
             },
             correctAnswer: "d"
-        },
-        {
+        };
+            var q6 = {
             question: "What did Janice's ex-husband sell?",
             answers: {
                 a: "Jewelry",
@@ -126,8 +128,9 @@
                 d: "Flowers"
             },
             correctAnswer: "b"
-        },
-        {
+        };
+
+            var q7 = {
             question:"Who took a dart in their butt to save Marcel?",
             answers: {
                 a: "Phoebe",
@@ -136,8 +139,9 @@
                 d: "Joey"
             },
             correctAnswer: "a"
-        },
-        {
+        };
+
+            var q8 = {
             question: "What dessert did Rachel try to make for Thanksgiving?",
             answers: {
                 a: "Souffle",
@@ -146,8 +150,9 @@
                 d: "Trifle" 
             },
             correctAnswer: "d"
-        },
-        {	
+        };
+
+            var q9 = {
             question: "Which is not a Phoebe song?",
             answers: {
                 a: "Little Fetus",
@@ -156,19 +161,19 @@
                 d: "I Hate Chandler" 
             },
             correctAnswer: "d"
-        },
-        {
-            question: "Isnít that a kick-you-in-the-crotch, spit-on-your-neck fantastic?î Who said it?",
+        };
+         var q10 = {
+            question: "Isn't that a kick-you-in-the-crotch, spit-on-your-neck fantastic?î Who said it?",
             answers: {
                 a: "Ross",
                 b: "Monica",
                 c: "Rachel",
                 d: "Chandler"
             },
-            correcAnswer: "d"
-        },
-        {
-            question: "This is a brand new information! Who said it?",
+            correctAnswer: "d"
+        };
+            var q11 = {
+            question11: "This is a brand new information! Who said it?",
             answers: {
                 a: "Monica",
                 b: "Rachel",
@@ -176,12 +181,58 @@
                 d: "Phoebe"
             },
             correctAnswer: "d"
-        },
-    ];
+        };
+
+    var questionArray = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11];
   
     // display quiz right away
-    buildQuiz();
+   buildQuiz();
   
-    // on submit, show results
-    submitButton.addEventListener("click", showResults);
-  })();
+// how the trivia will start with timer
+    function setup() {
+        index = 0;
+        $('.question').append('<button id="startButton">Start</button>');
+        $('#startButton').on('click', function() {
+            $(this).hide();
+            countdownTimer.start();
+            loadQuiz(index);       
+    });
+
+    function getAnswer() {
+        $('.answerChoice').on('click', function() {
+            console.log('alert'.index);
+                index++;
+                console.log('click', index);
+                $(".question").text('');
+                $("#buttonA").text('');
+                $("#buttonB").text('');
+                $("#buttonC").text('');
+                $("#buttond").text('');
+                loadQuiz();
+        })
+    }
+    // for right answers
+    function answerCorrect() {
+        correct++;
+        alert("Correct!");
+        console.log("correct");
+    }
+    // for wrong answers
+    function answerWrong() {
+        wrong++;
+        alert("Incorrect!");
+        console.log("wrong");
+    }
+
+    // show Score
+    function showScore() {
+        $('.question').empty();
+        $('.question').append("<h2><p>" + correct + " correct</p><h2>");
+        $('.question').append("<h2><p>" + wrong + " correct</p><h2>");
+        countdownTimer.stop();
+        $('.timer').empty();
+    }
+};
+
+
+});
