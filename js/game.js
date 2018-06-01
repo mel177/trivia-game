@@ -6,15 +6,15 @@ $(document).ready(
                 var question = questionArray[questionNumber]
                 var answersHTML = [];
                 answersHTML.push('<input type="radio" name="' + questionNumber + '"> A: ' + question.answers.a + '</label>');
-                answersHTML.push('<label> B: ' + question.answers.b + '</label>');
-                answersHTML.push('<label> C: ' + question.answers.c + '</label>');
-                answersHTML.push('<label> D:' + question.answers.d + '</label>');
+                answersHTML.push('<input type="radio" name="' + questionNumber + '"> B: ' + question.answers.b + '</label>');
+                answersHTML.push('<input type="radio" name="' + questionNumber + '"> C: ' + question.answers.c + '</label>');
+                answersHTML.push('<input type="radio" name="' + questionNumber + '"> D: ' + question.answers.d + '</label>');
 
                 var triviaHTML = '\
              <div class="row">\
                 <div class="col-sm-12">\
-                <p>' + questionNumber + '. ' + question.question + '</p>\
-                ' + answersHTML.join("") + '\
+                <p>' + questionNumber + ' . ' + question.question  + '</p>\
+                ' + answersHTML.join("")  + '\
                 </div>\
                 </div>\
                 ';
@@ -31,9 +31,9 @@ $(document).ready(
 
         var index = 0;
         var countdownTimer = {
-            time: 300,
+            time: 150,
             reset: function () {
-                this.time = 300;
+                this.time = 150;
                 $('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
             },
             start: function () {
