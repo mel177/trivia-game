@@ -1,14 +1,14 @@
 $(document).ready(
     function () {
-        function displayTrivia(quizElement) {
+        function displayTrivia(quizElement, resultsContainer, submitButton) {
 
             for (questionNumber in questionArray) {
                 var question = questionArray[questionNumber]
                 var answersHTML = [];
-                answersHTML.push('<input type="radio" name="' + questionNumber + '"> A: ' + question.answers.a + '</label>');
-                answersHTML.push('<input type="radio" name="' + questionNumber + '"> B: ' + question.answers.b + '</label>');
-                answersHTML.push('<input type="radio" name="' + questionNumber + '"> C: ' + question.answers.c + '</label>');
-                answersHTML.push('<input type="radio" name="' + questionNumber + '"> D: ' + question.answers.d + '</label>');
+                answersHTML.push('<input type="radio" value="a" class="selectAnswer" name="' + questionNumber + '"> A: ' + question.answers.a + '</label>');
+                answersHTML.push('<input type="radio" value="b" class="selectAnswer" name="' + questionNumber + '"> B: ' + question.answers.b + '</label>');
+                answersHTML.push('<input type="radio" value="c" class="selectAnswer" name="' + questionNumber + '"> C: ' + question.answers.c + '</label>');
+                answersHTML.push('<input type="radio" value="d" class="selectAnswer" name="' + questionNumber + '"> D: ' + question.answers.d + '</label>');
 
                 var triviaHTML = '\
              <div class="row">\
@@ -21,6 +21,11 @@ $(document).ready(
 
                 quizElement.innerHTML = quizElement.innerHTML + triviaHTML;
                 //   questionNumber++;
+                
+                // when user sumbit quiz
+                //submitButton.onclick = function() {
+                   // showResults(questions, quizElement, resultsContainer)
+                //}
             }
         }
 
@@ -31,9 +36,9 @@ $(document).ready(
 
         var index = 0;
         var countdownTimer = {
-            time: 150,
+            time: 10,
             reset: function () {
-                this.time = 150;
+                this.time = 10;
                 $('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
             },
             start: function () {
@@ -42,6 +47,12 @@ $(document).ready(
             stop: function () {
                 clearInterval(counter);
             },
+
+            timeOut: function() {
+                clearTimeout(countdownTimer);
+                alert("Times Up!")
+            },
+
             count: function () {
                 countdownTimer.time--;
                 console.log(countdownTimer.time);
@@ -51,7 +62,8 @@ $(document).ready(
                         '<h3>' + countdownTimer.time + 'seconds remaining</h3>');
                 } else {
                     index++;
-                    answerWrong();
+                    countdownTimer.timeOut();
+                    
                     countdownTimer.reset();
                     if (index < questionArray.length) {
                         loadQuiz(index);
@@ -64,8 +76,8 @@ $(document).ready(
 
         }
         // Trivia quiz container
-        var correct = 0;
-        var wrong = 0;
+        var correct;
+        var wrong = [];
 
         // how the trivia will start with timer
         $('#startButton').on('click', function () {
@@ -74,30 +86,39 @@ $(document).ready(
             buildQuiz();
         });
 
+        // when user click on a letter, we need to see if they click on the right answer
+            
+
+
         function getAnswer() {
-            $('.answerChoice').on('click', function () {
-                console.log('alert'.index);
-                index++;
-                console.log('click', index);
-                $(".question").text('');
-                $("#buttonA").text('');
-                $("#buttonB").text('');
-                $("#buttonC").text('');
-                $("#buttond").text('');
-                loadQuiz();
-            })
+            $('.selectAnswer').on('click', function () {
+                var selValue = $('input[name="value"]:checked').val(); 
+                $('p').html('<br/>Selected Radio Button Value is : <b>' + selValue + '</b>');
+                var answerBank= [];
+               
+               
+
+                //if question==1 var question1=this.value
+                //if question==2 var question2==this.value;
+
+
+            });
+            //submit()
+            //if question1==q1.correctAnswer{correct anser logic}else{incorrect anser logic}
+            
+                
+               
+            
         }
         // for right answers
         function answerCorrect() {
             correct++;
-            alert("Correct!");
-            console.log("correct");
+            
         }
         // for wrong answers
         function answerWrong() {
             wrong++;
-            alert("Incorrect!");
-            console.log("wrong");
+            
         }
 
         // show Score
@@ -110,7 +131,7 @@ $(document).ready(
         }
     });
 
-
+//setting attributes for each radio buttons selected
 
 var q1 = {
     question: "Whats is the name of Phoebe's birth mother?",
@@ -231,3 +252,4 @@ var q11 = {
 };
 
 var questionArray = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11];
+var answerArray = [];
