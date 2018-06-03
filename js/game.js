@@ -33,12 +33,12 @@ $(document).ready(
             var quizElement = document.querySelector('#quiz');
             displayTrivia(quizElement);
         }
-
+        // timer to the trivia quiz is built here
         var index = 0;
         var countdownTimer = {
-            time: 10,
+            time: 100,
             reset: function () {
-                this.time = 10;
+                this.time = 100;
                 $('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
             },
             start: function () {
@@ -100,26 +100,32 @@ $(document).ready(
 
                 //if question==1 var question1=this.value
                 //if question==2 var question2==this.value;
+                var userAnswer = '';
+                var numCorrect = 0;
+            // for each questions answered
+            for(var i=0; i<questions.length; i++) {
 
 
-            });
-            //submit()
-            //if question1==q1.correctAnswer{correct anser logic}else{incorrect anser logic}
-            
+            // which answer is selected
+            userAnswer = (answerArray[i].querySelector('input[name=question'+i+']:checked')||{}).value;
+
+            // if user selects the right answer
+            if(userAnswer===question[i].correctAnswer){
+                numCorrect++;
+            }
+            }
+            // show the number correct out of the total
+            resultsContainer.innerHTML = numCorrect + 'out of ' + question.length;
+ });
                 
-               
-            
-        }
-        // for right answers
-        function answerCorrect() {
-            correct++;
-            
-        }
-        // for wrong answers
-        function answerWrong() {
-            wrong++;
-            
-        }
+                   
+}
+
+// submit button
+    submitButton.onclick = function() {
+        showResults(question, quizElement, resultsContainer);
+    }
+        
 
         // show Score
         function showScore() {
