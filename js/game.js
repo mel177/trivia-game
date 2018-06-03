@@ -137,40 +137,41 @@ $(document).ready(
         var question11 = document.quizElement.q11.value;
         var correct = 0;
 
-        if(q1 == "b") {
+        if(q1 === "b") {
             correct++;
         }
-        if(q2 == "d") {
+        if(q2 === "d") {
             correct++;
         }
-        if(q3 == "a") {
+        if(q3 === "a") {
             correct++;
         }
-        if(q4 == "a") {
+        if(q4 === "a") {
             correct++;
         }
-        if(q5 == "d") {
+        if(q5 === "d") {
             correct++;
         }
-        if(q6 == "b") {
+        if(q6 === "b") {
             correct++;
         }
-        if(q7 == "a") {
+        if(q7 === "a") {
             correct++;
         }
-        if(q8 == "b") {
+        if(q8 === "b") {
             correct++;
         }
-        if(q9 == "d") {
+        if(q9 === "d") {
             correct++;
         }
-        if(q10 == "d") {
+        if(q10 === "d") {
             correct++;
         }
-        if(q11 == "d") {
+        if(q11 === "d") {
             correct++;
         }
 
+        document.getElementById("numCorrect").innerHTML = "You got " + correct + " correct.";
     }
 
 
