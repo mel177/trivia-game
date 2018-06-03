@@ -122,12 +122,60 @@ $(document).ready(
 }
 
 // submit button
-    submitButton.onclick = function() {
-        showResults(question, quizElement, resultsContainer);
-    }
-        
+    function submitButton(){
 
-        // show Score
+        var question1 = document.quizElement.q1.value;
+        var question2 = document.quizElement.q2.value;
+        var question3 = document.quizElement.q3.value;
+        var question4 = document.quizElement.q4.value;
+        var question5 = document.quizElement.q5.value;
+        var question6 = document.quizElement.q6.value;
+        var question7 = document.quizElement.q7.value;
+        var question8 = document.quizElement.q8.value;
+        var question9 = document.quizElement.q9.value;
+        var question10 = document.quizElement.q10.value;
+        var question11 = document.quizElement.q11.value;
+        var correct = 0;
+
+        if(q1 == "b") {
+            correct++;
+        }
+        if(q2 == "d") {
+            correct++;
+        }
+        if(q3 == "a") {
+            correct++;
+        }
+        if(q4 == "a") {
+            correct++;
+        }
+        if(q5 == "d") {
+            correct++;
+        }
+        if(q6 == "b") {
+            correct++;
+        }
+        if(q7 == "a") {
+            correct++;
+        }
+        if(q8 == "b") {
+            correct++;
+        }
+        if(q9 == "d") {
+            correct++;
+        }
+        if(q10 == "d") {
+            correct++;
+        }
+        if(q11 == "d") {
+            correct++;
+        }
+
+    }
+
+
+
+    // show Score
         function showScore() {
             $('.question').empty();
             $('.question').append("<h2><p>" + correct + " correct</p><h2>");
