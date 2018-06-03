@@ -9,7 +9,9 @@ $(document).ready(
                 answersHTML.push('<input type="radio" value="b" class="selectAnswer" name="' + questionNumber + '"> B: ' + question.answers.b + '</label>');
                 answersHTML.push('<input type="radio" value="c" class="selectAnswer" name="' + questionNumber + '"> C: ' + question.answers.c + '</label>');
                 answersHTML.push('<input type="radio" value="d" class="selectAnswer" name="' + questionNumber + '"> D: ' + question.answers.d + '</label>');
-
+               
+        
+                
                 var triviaHTML = '\
              <div class="row">\
                 <div class="col-sm-12">\
@@ -21,18 +23,23 @@ $(document).ready(
 
                 quizElement.innerHTML = quizElement.innerHTML + triviaHTML;
                 //   questionNumber++;
-                
-                // when user sumbit quiz
-                //submitButton.onclick = function() {
-                   // showResults(questions, quizElement, resultsContainer)
-                //}
+            
+
+               
             }
+
         }
+
 
         function buildQuiz() {
             var quizElement = document.querySelector('#quiz');
-            displayTrivia(quizElement);
+            var resultsContainer = document.querySelector('.resultsContainer');
+            displayTrivia(quizElement, resultsContainer, submitButton);
+            getAnswer();
+            var submitElement = document.getElementById("submitButton");
+            submitElement.onclick = submitButton;
         }
+        
         // timer to the trivia quiz is built here
         var index = 0;
         var countdownTimer = {
@@ -92,8 +99,8 @@ $(document).ready(
 
         function getAnswer() {
             $('.selectAnswer').on('click', function () {
-                var selValue = $('input[name="value"]:checked').val(); 
-                $('p').html('<br/>Selected Radio Button Value is : <b>' + selValue + '</b>');
+                var selValue = $(this).val(); 
+                $('').html('<br/>Selected Radio Button Value is : <b>' + selValue + '</b>');
                 var answerBank= [];
                
                
@@ -103,6 +110,7 @@ $(document).ready(
                 var userAnswer = '';
                 var numCorrect = 0;
             // for each questions answered
+
             for(var i=0; i<questions.length; i++) {
 
 
@@ -124,52 +132,53 @@ $(document).ready(
 // submit button
     function submitButton(){
 
-        var question1 = document.quizElement.q1.value;
-        var question2 = document.quizElement.q2.value;
-        var question3 = document.quizElement.q3.value;
-        var question4 = document.quizElement.q4.value;
-        var question5 = document.quizElement.q5.value;
-        var question6 = document.quizElement.q6.value;
-        var question7 = document.quizElement.q7.value;
-        var question8 = document.quizElement.q8.value;
-        var question9 = document.quizElement.q9.value;
-        var question10 = document.quizElement.q10.value;
-        var question11 = document.quizElement.q11.value;
+        var question1 = document.querySelector('input[name="0"]:checked').value
+        var question2 = document.querySelector('input[name="1"]:checked').value;
+        var question3 = document.querySelector('input[name="2"]:checked').value;
+        var question4 = document.querySelector('input[name="3"]:checked').value;
+        var question5 = document.querySelector('input[name="4"]:checked').value;
+        var question6 = document.querySelector('input[name="5"]:checked').value;
+        var question7 = document.querySelector('input[name="6"]:checked').value;
+        var question8 = document.querySelector('input[name="7"]:checked').value;
+        var question9 = document.querySelector('input[name="8"]:checked').value;
+        var question10 =document.querySelector('input[name="9"]:checked').value;
+        var question11 =document.querySelector('input[name="10"]:checked').value;
         var correct = 0;
 
-        if(q1 === "b") {
+        if(question1 === "b") {
             correct++;
         }
-        if(q2 === "d") {
+        if(question2 === "d") {
             correct++;
         }
-        if(q3 === "a") {
+        if(question3 === "a") {
             correct++;
         }
-        if(q4 === "a") {
+        if(question4 === "a") {
             correct++;
         }
-        if(q5 === "d") {
+        if(question5 === "d") {
             correct++;
         }
-        if(q6 === "b") {
+        if(question6 === "b") {
             correct++;
         }
-        if(q7 === "a") {
+        if(question7 === "a") {
             correct++;
         }
-        if(q8 === "b") {
+        if(question8 === "b") {
             correct++;
         }
-        if(q9 === "d") {
+        if(question9 === "d") {
             correct++;
         }
-        if(q10 === "d") {
+        if(question10 === "d") {
             correct++;
         }
-        if(q11 === "d") {
+        if(question11 === "d") {
             correct++;
         }
+        
 
         document.getElementById("numCorrect").innerHTML = "You got " + correct + " correct.";
     }
