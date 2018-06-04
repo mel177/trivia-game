@@ -22,7 +22,7 @@ $(document).ready(
                 ';
 
                 quizElement.innerHTML = quizElement.innerHTML + triviaHTML;
-                //   questionNumber++;
+              
             
 
                
@@ -58,6 +58,7 @@ $(document).ready(
             timeOut: function() {
                 clearTimeout(countdownTimer);
                 alert("Times Up!")
+                
             },
 
             count: function () {
@@ -144,39 +145,63 @@ $(document).ready(
         var question10 =document.querySelector('input[name="9"]:checked').value;
         var question11 =document.querySelector('input[name="10"]:checked').value;
         var correct = 0;
+        var incorrect = 0;
 
         if(question1 === "b") {
             correct++;
         }
+        else{
+            incorrect++;
+        }    
         if(question2 === "d") {
             correct++;
+        } else{
+            incorrect++;
         }
         if(question3 === "a") {
             correct++;
+        }else{
+            incorrect++;
         }
         if(question4 === "a") {
             correct++;
+        }else{
+            incorrect++;
         }
         if(question5 === "d") {
             correct++;
+        }else{
+            incorrect++;
         }
         if(question6 === "b") {
             correct++;
+        }else{
+            incorrect++;
         }
         if(question7 === "a") {
             correct++;
+        }else{
+            incorrect++;
         }
         if(question8 === "b") {
             correct++;
+        }else{
+            incorrect++;
         }
         if(question9 === "d") {
             correct++;
+        }else{
+            incorrect++;
         }
         if(question10 === "d") {
             correct++;
+        }else{
+            incorrect++;
         }
         if(question11 === "d") {
             correct++;
+        }else{
+            incorrect++;
         }
         
 
